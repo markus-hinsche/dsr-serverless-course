@@ -10,6 +10,3 @@ def lambda_handler(event, context):
 # 	sentence = event['sentence']
 # 	print(predict(sentence))
 # 	return predict(sentence)
-
-
-
