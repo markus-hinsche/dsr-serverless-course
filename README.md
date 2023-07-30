@@ -31,13 +31,13 @@ Clone the github repo
     $ git clone git@github.com:safaa-alnabulsi/dsr-serverless-course.git
     cd dsr-serverless-course
 
-Create python3.6 virtual env, use
+Create python3.9 virtual env, use
 
-    $ conda create -n dsr-serverless-py36 python=3.6 -y
+    $ conda create -n dsr-serverless-py39 python=3.9 -y
 
 Activate this environment, use
 
-     $ conda activate dsr-serverless-py36
+     $ conda activate dsr-serverless-py39
 
 Install needed libraries, use
 
@@ -86,7 +86,7 @@ To test if you have access, run the following and you shouldn't see an error:
 Note:
 If you have an issue in using the aws command try the following way in doing the setup:
 
-    $ cat > ~/.aws/config
+    $ cat ~/.aws/config
     [default]
     region=us-west-2
     aws_access_key_id=foo
@@ -118,7 +118,7 @@ To check its value
 So, to create Lambda For Windows (for tutorial 4,5,6)
 
     set MY_NAME= Enter your name
-    aws lambda create-function --function-name %MY_NAME%-function-from-cli --runtime python3.6 --handler lambda_function.lambda_handler --role %ROLE_ARN% --zip-file fileb://my_lambda.zip
+    aws lambda create-function --function-name %MY_NAME%-function-from-cli --runtime python3.9 --handler lambda_function.lambda_handler --role %ROLE_ARN% --zip-file fileb://my_lambda.zip
 
 ## Tutorials & Labs
 
