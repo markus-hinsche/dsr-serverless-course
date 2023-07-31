@@ -1,5 +1,8 @@
 example-4-hello-world-cli/my_lambda.zip
 example-4-hello-world-cli/out
+example-6-polly/my_lambda_polly.zip
+example-6-polly/my_lambda.zip
+example-6-polly/out
 
 .DS_Store
 .history
