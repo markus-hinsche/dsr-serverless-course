@@ -63,7 +63,7 @@ If the user name is `cli-user`, run the following:
     $ aws configure --profile cli-user
     AWS Access Key ID: foo
     AWS Secret Access Key: bar
-    Default region name [us-west-2]: eu-west-1
+    Default region name [us-west-2]: eu-central-1
     Default output format [None]: json
 
     $ export AWS_PROFILE=cli-user

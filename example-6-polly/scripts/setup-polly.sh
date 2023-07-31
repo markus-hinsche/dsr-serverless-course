@@ -16,7 +16,7 @@ zip -r my_lambda lambda_function_polly.py
 echo "Creating IAM Role"
 aws cloudformation deploy --template-file templates/iam-role.yaml \
                           --stack-name $STACK_ROLE_NAME \
-                          --region eu-west-1 \
+                          --region eu-central-1 \
                           --capabilities CAPABILITY_NAMED_IAM
 
 # get the ARN of the IAM role
@@ -26,7 +26,7 @@ ROLE_ARN=$(aws cloudformation describe-stacks --stack-name $STACK_ROLE_NAME \
 
 # create s3 bucket
 echo "Creating S3 Bucket"
-aws cloudformation deploy --template-file templates/s3-bucket.yaml --stack-name $STACK_BUCKET_NAME --parameter-overrides BucketName=$BUCKET_NAME --region eu-west-1
+aws cloudformation deploy --template-file templates/s3-bucket.yaml --stack-name $STACK_BUCKET_NAME --parameter-overrides BucketName=$BUCKET_NAME --region eu-central-1
 
 # create a new lambda function
 echo "Creating lambda function"

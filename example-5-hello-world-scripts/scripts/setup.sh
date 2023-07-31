@@ -12,7 +12,7 @@ zip -r my_lambda lambda_function.py
 echo "Creating the IAM Role"
 aws cloudformation deploy --template-file templates/iam-role.yaml \
                           --stack-name $STACK_ROLE_NAME \
-                          --region eu-west-1 \
+                          --region eu-central-1 \
                           --capabilities CAPABILITY_NAMED_IAM
 
 # get the ARN of the IAM role
