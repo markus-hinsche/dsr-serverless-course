@@ -7,19 +7,27 @@ FUNCTION_NAME=$1
 PAYLOAD=$2
 
 # package the lambda code
-zip -r my_lambda *.py
+zip -r my_lambda "*.py"
 
 # update the lambda function after changing its code
 echo "Updating the lambda code"
-aws lambda update-function-code --function-name $FUNCTION_NAME --zip-file fileb://my_lambda.zip
+aws lambda update-function-code \
+    --function-name "$FUNCTION_NAME" \
+    --zip-file fileb://my_lambda.zip
 
 sleep 5
 # invoke the lambda, decode and show the logs
 echo "Invoking the lambda"
-aws lambda invoke --function-name $FUNCTION_NAME --payload "$PAYLOAD" out --log-type Tail --query 'LogResult' --output text |  base64 -d
+aws lambda invoke \
+    --function-name $FUNCTION_NAME \
+    --payload "$PAYLOAD" \
+    out \
+    --log-type Tail \
+    --query 'LogResult' \
+    --output text |  base64 -d
 
 # clean the zip file
-rm my_lambda.zip
+rm -f my_lambda.zip
 
 # clean the log file
-rm out
+rm -f out
