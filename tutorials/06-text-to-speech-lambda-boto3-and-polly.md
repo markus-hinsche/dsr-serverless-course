@@ -1,23 +1,32 @@
-# Text to speech example, using boto3 (Python SDK) 
-    
-    cd example-6-polly
+# Text to speech example, using boto3 (Python SDK)
+
+First, manually create a bucket with a unique name in AWS console's S3 section.
+The access should be public, ACL should be enabled.
+
+```bash
+cd example-6-polly
+```
 
 To create a new lambda, the role and the s3 bucket:
 
-    . scripts/setup-polly.sh function-name my-unique-bucket-name
+```bash
+. scripts/setup-polly.sh example-6-polly-fct markus-dsr-polly-foobar
+```
 
 ![Screenshot](architecture/setup-lambda-polly.png)
 
 To deploy a lambda and invoke it:
 
-    . scripts/deploy.sh function-name '{"bucket-name": "my-unique-bucket-name"}'
-
-Note: for linux, try changing the script and use `base64 -d`
+```bash
+. scripts/deploy.sh example-6-polly-fct '{"bucket-name": "markus-dsr-polly-foobar"}'
+```
 
 ![Screenshot](architecture/invoke-lambda-polly.png)
 
-Copy the url to your browser and download the file! 
+Copy the URL to your browser and download the file!
 
 Note: Don't forget to clean your stacks by executing:
 
-    . scripts/clean.sh function-name my-unique-bucket-name
+```bash
+. scripts/clean.sh example-6-polly-fct markus-dsr-polly-foobar
+```

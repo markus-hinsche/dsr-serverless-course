@@ -12,7 +12,7 @@ zip -r my_lambda lambda_function.py
 echo "Creating the IAM Role"
 aws cloudformation deploy --template-file templates/iam-role.yaml \
                           --stack-name $STACK_ROLE_NAME \
-                          --region eu-west-1 \
+                          --region eu-central-1 \
                           --capabilities CAPABILITY_NAMED_IAM
 
 # get the ARN of the IAM role
@@ -23,11 +23,11 @@ ROLE_ARN=$(aws cloudformation describe-stacks --stack-name $STACK_ROLE_NAME \
 # ROLE_ARN=arn:aws:iam::434405979992:role/slambda-iam-role-LambdaExecutionRole-LHBK748V44BE
 # create a new lambda function
 echo "Creating the lambda function"
-aws lambda create-function --function-name $FUNCTION_NAME \
-                           --runtime python3.6 \
+aws lambda create-function --function-name "$FUNCTION_NAME" \
+                           --runtime python3.9 \
                            --handler lambda_function.lambda_handler \
-                           --role $ROLE_ARN \
+                           --role "$ROLE_ARN" \
                            --zip-file fileb://my_lambda.zip
 
 # clean the zip file
-rm my_lambda.zip
+rm -f my_lambda.zip

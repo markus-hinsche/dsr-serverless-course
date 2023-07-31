@@ -4,5 +4,4 @@ def predict(sentence):
 		return "positive"
 	elif sentence == "Sad":
 		return "negative"
-
 	return "neutral"

@@ -1,11 +1,11 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Description: S3 bucket to store the generated audio files
 
 Parameters:
   BucketName:
     Description: The s3 bucket name
     Type: String
-    Default: 'polly-audiofiles-bucket'
+    Default: "polly-audiofiles-bucket"
 
 Resources:
   Bucket:
@@ -19,12 +19,12 @@ Resources:
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
-        - Effect: Allow
-          Action:
-            - s3:Get*
-            - s3:List*
-          Principal: '*'
-          Resource: !Join ['', ['arn:aws:s3:::', !Ref Bucket, '/*']]
+          - Effect: Allow
+            Action:
+              - s3:Get*
+              - s3:List*
+            Principal: "*"
+            Resource: !Join ["", ["arn:aws:s3:::", !Ref Bucket, "/*"]]
 
 Outputs:
   BucketArn:
