@@ -1,12 +1,12 @@
 # Create & use lambda using aws-cli
 
-```
+```bash
 cd example-4-hello-world-cli
 ```
 
 1. Create an IAM Role for AWS Lambda, you need Admin user to do that:
 
-```
+```bash
 aws cloudformation deploy \
     --template-file templates/iam-role.yaml \
     --stack-name slambda-iam-role \
@@ -16,30 +16,35 @@ aws cloudformation deploy \
 
 2. To get the IAM Role Arn, use:
 
-```
+```bash
 ROLE_ARN=$(aws cloudformation describe-stacks --stack-name slambda-iam-role --query 'Stacks[0].Outputs[?OutputKey==`LambdaExecutionRoleArn`].OutputValue' --out text) && echo $ROLE_ARN
 ```
 
 3. Create an archive by zipping your code:
 
-```
+```bash
 zip -r my_lambda lambda_function.py
 ```
 
 4. Create a lambda:
 
-```
+```bash
 MY_NAME=$(whoami)
-aws lambda create-function --function-name $MY_NAME-function-from-cli --runtime python3.6 --handler lambda_function.lambda_handler  --role $ROLE_ARN --zip-file fileb://my_lambda.zip
+aws lambda create-function \
+    --function-name $MY_NAME-function-from-cli \
+    --runtime python3.9 \
+    --handler lambda_function.lambda_handler \
+    --role $ROLE_ARN \
+    --zip-file fileb://my_lambda.zip
 ```
 
 The expected output should look like:
 
 ```
 {
-    "FunctionName": "salnabulsi-function-from-cli",
-    "FunctionArn": "arn:aws:lambda:eu-central-1:434405979992:function:salnabulsi-function-from-cli",
-    "Runtime": "python3.6",
+    "FunctionName": "markus-function-from-cli",
+    "FunctionArn": "arn:aws:lambda:eu-central-1:434405979992:function:markus-function-from-cli",
+    "Runtime": "python3.9",
     "Role": "arn:aws:iam::434405979992:role/slambda-iam-role-LambdaExecutionRole-RE7ACGPZ3XSX",
     "Handler": "lambda_function.lambda_handler",
     "CodeSize": 344,
@@ -60,28 +65,43 @@ The expected output should look like:
 
 5. Invoke the lambda and notice the `out` file in your local machine folder. It contains the logs:
 
-```
-aws lambda invoke --function-name $MY_NAME-function-from-cli  out --log-type Tail --query 'LogResult' --output text |  Base64 -D
-
+```bash
+aws lambda invoke \
+    --function-name $MY_NAME-function-from-cli \
+    out \
+    --log-type Tail \
+    --query 'LogResult' \
+    --output text | base64 -d
 ```
 
 The expected output should look like:
 
 ```
-    START RequestId: 524ed3c5-ce0c-4f69-b1ef-2526431e4e41 Version: $LATEST
-    Loading function
-    END RequestId: 524ed3c5-ce0c-4f69-b1ef-2526431e4e41
-    REPORT RequestId: 524ed3c5-ce0c-4f69-b1ef-2526431e4e41	Duration: 0.27 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 50 MB	Init Duration: 1.05 ms
+START RequestId: d8be8669-a0cc-4c31-9de2-edb7f58fa4be Version: $LATEST
+inside the lambda function cli
+[ERROR] KeyError: 'key1'
+Traceback (most recent call last):
+  File "/var/task/lambda_function.py", line 4, in lambda_handler
+    print("value1 = ", event['key1'])END RequestId: d8be8669-a0cc-4c31-9de2-edb7f58fa4be
+REPORT RequestId: d8be8669-a0cc-4c31-9de2-edb7f58fa4be	Duration: 18.99 ms	Billed Duration: 19 ms	Memory Size: 128 MB	Max Memory Used: 36 MB	Init Duration: 112.16 ms
 ```
 
-6. Change the code of the lambda to recieve inputs, and redeploy (Note that you have to repackage the lambda and update the code):
+6. Pass a payload when invoking so the functions receives inputs, and redeploy (Note that you have to repackage the lambda and update the code):
 
-```
+```bash
 zip -r my_lambda lambda_function.py
 
-aws lambda update-function-code --function-name $MY_NAME-function-from-cli --zip-file fileb://my_lambda.zip
+aws lambda update-function-code \
+    --function-name $MY_NAME-function-from-cli \
+    --zip-file fileb://my_lambda.zip
 
-aws lambda invoke --function-name $MY_NAME-function-from-cli --payload '{"key1": "value1 of key1"}' out --log-type Tail --query 'LogResult' --output text |  Base64 -D
+aws lambda invoke \
+    --function-name $MY_NAME-function-from-cli \
+    --payload '{"key1": "value1 of key1"}' \
+    out \
+    --log-type Tail \
+    --query 'LogResult' \
+    --output text | base64 -d
 ```
 
 The expected output should look like:
@@ -94,22 +114,22 @@ The expected output should look like:
     REPORT RequestId: 7c79341c-86ca-4066-b745-5975faedb446	Duration: 0.22 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 50 MB	Init Duration: 0.89 ms
 ```
 
-Note: for linux, try using `base64 -d`
+Note: for other OS, try using `Base64 -D`
 
-7. Check it all in the console.
+7. Check it all in the AWS console.
 
 ### to update the function code, use:
 
-```
+```bash
 zip -r my_lambda lambda_function.py && aws lambda update-function-code --function-name $MY_NAME-function-from-cli --zip-file fileb://my_lambda.zip
 ```
 
 ### to clean up, use:
 
-```
+```bash
 aws lambda delete-function --function-name $MY_NAME-function-from-cli
 
- aws cloudformation delete-stack --stack-name slambda-iam-role
+aws cloudformation delete-stack --stack-name slambda-iam-role
 ```
 
 ## Takeaways:

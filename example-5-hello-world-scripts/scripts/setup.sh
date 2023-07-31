@@ -24,7 +24,7 @@ ROLE_ARN=$(aws cloudformation describe-stacks --stack-name $STACK_ROLE_NAME \
 # create a new lambda function
 echo "Creating the lambda function"
 aws lambda create-function --function-name $FUNCTION_NAME \
-                           --runtime python3.6 \
+                           --runtime python3.9 \
                            --handler lambda_function.lambda_handler \
                            --role $ROLE_ARN \
                            --zip-file fileb://my_lambda.zip

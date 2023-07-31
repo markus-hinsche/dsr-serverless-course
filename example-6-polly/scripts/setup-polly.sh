@@ -31,7 +31,7 @@ aws cloudformation deploy --template-file templates/s3-bucket.yaml --stack-name 
 # create a new lambda function
 echo "Creating lambda function"
 aws lambda create-function --function-name $FUNCTION_NAME \
-                           --runtime python3.6 \
+                           --runtime python3.9 \
                            --handler lambda_function_polly.lambda_handler \
                            --role $ROLE_ARN \
                            --zip-file fileb://my_lambda.zip
