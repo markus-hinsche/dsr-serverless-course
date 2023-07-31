@@ -1,5 +1,8 @@
 # Text to speech example, using boto3 (Python SDK)
 
+First, manually create a bucket with a unique name in AWS console's S3 section.
+The access should be public, ACL should be enabled.
+
 ```bash
 cd example-6-polly
 ```
