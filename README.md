@@ -28,7 +28,7 @@ Follow the instructions in [this page](https://aws.amazon.com/premiumsupport/kno
 
 Clone the github repo
 
-    $ git clone git@github.com:safaa-alnabulsi/dsr-serverless-course.git
+    $ git clone git@github.com:markus-hinsche/dsr-serverless-course.git
     cd dsr-serverless-course
 
 Create python3.9 virtual env, use
