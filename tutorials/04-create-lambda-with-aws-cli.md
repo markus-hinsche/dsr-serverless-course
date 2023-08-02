@@ -10,7 +10,7 @@ cd example-4-hello-world-cli
 aws cloudformation deploy \
     --template-file templates/iam-role.yaml \
     --stack-name slambda-iam-role \
-    --region eu-west-1 \
+    --region eu-central-1 \
     --capabilities CAPABILITY_NAMED_IAM
 ```
 

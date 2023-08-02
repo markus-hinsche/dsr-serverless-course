@@ -47,7 +47,7 @@ _Note:_ to deactivate an active environment, use
 
      $ conda deactivate
 
-Intall `zip` command:
+Install `zip` command:
 
 - Ubuntu: `sudo apt-get install -y zip`
 - Manjaro: `sudo pacman -S zip`

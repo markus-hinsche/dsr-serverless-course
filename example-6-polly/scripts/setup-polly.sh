@@ -41,4 +41,4 @@ aws lambda create-function --function-name "$FUNCTION_NAME" \
                            --zip-file fileb://my_lambda.zip
 
 # clean the zip file
-rm -f my_lambda.zip
+# rm -f my_lambda.zip

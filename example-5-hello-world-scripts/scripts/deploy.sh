@@ -7,7 +7,7 @@ FUNCTION_NAME=$1
 PAYLOAD=$2
 
 # package the lambda code
-zip -r my_lambda "*.py"
+zip -r my_lambda *.py
 
 # update the lambda function after changing its code
 echo "Updating the lambda code"
@@ -27,7 +27,7 @@ aws lambda invoke \
     --output text |  base64 -d
 
 # clean the zip file
-rm -f my_lambda.zip
+# rm -f my_lambda.zip
 
 # clean the log file
-rm -f out
+# rm -f out
