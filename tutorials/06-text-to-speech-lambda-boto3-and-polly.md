@@ -10,7 +10,7 @@ cd example-6-polly
 To create a new lambda, the role and the s3 bucket:
 
 ```bash
-. scripts/setup-polly.sh example-6-polly-fct markus-dsr-polly-foobar
+. scripts/setup-polly.sh example-6-polly-fct
 ```
 
 ![Screenshot](architecture/setup-lambda-polly.png)

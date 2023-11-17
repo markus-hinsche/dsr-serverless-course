@@ -2,6 +2,8 @@ my_lambda.zip
 my_lambda_polly.zip
 out
 example-5-hello-world-scripts/package
+example-7-dependencies/my_virtual_env/
+example-7-dependencies/my_deployment_package.zip
 
 .DS_Store
 .history
